@@ -9,13 +9,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 
-// const userRoutes = require("./routes/user");
-// const postRoutes = require("./routes/post");
-// const topicRoutes = require("./routes/topic");
-
-// app.use("/user", userRoutes);
-// app.use("/post", postRoutes);
-// app.use("/topic", topicRoutes);
+const adminRoutes = require("./routes/admin");
+app.use("/admin", adminRoutes);
 
 const PORT = process.env.PORT;
 const SERVER_URL = process.env.SERVER_URL;
