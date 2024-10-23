@@ -1,12 +1,25 @@
 import React, { useState } from "react";
+import { AdminType } from "../types/AdminTypes";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/app/store";
+import { register } from "../redux/features/admin/adminSlice";
 
 function Register() {
+    const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState<string>("");
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const handleSubmit = () => {
         console.log({ email, username, password });
+        if (!email || !username || !password)
+            return alert("Please enter email, username and password");
+        const payload: AdminType = {
+            email,
+            username,
+            password,
+        };
+        dispatch(register(payload));
     };
 
     return (
