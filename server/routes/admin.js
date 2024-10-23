@@ -5,9 +5,9 @@ const adminController = require("../controllers/admin");
 
 // const authenticateToken = require("../middlewares/authMiddleware");
 
-router.post("/register", adminController.register);
 router.post("/login", adminController.login);
-router.get("/get-admin", adminController.getadmin);
-router.get("/getall-admin", adminController.getalladmin);
+router.post("/create-admin", adminController.create_admin);
+router.get("/get-admin", adminController.get_admin);
+router.get("/getall-admin", adminController.getall_admin);
 
 module.exports = router;

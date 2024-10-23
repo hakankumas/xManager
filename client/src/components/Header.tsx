@@ -11,7 +11,7 @@ function Header() {
             <Link to="/">Home</Link>
             {session ? (
                 <>
-                    <Link to="/register">Register</Link>
+                    <Link to="/admin/create-admin">Create Admin</Link>
                     <Link to="/logout">Logout</Link>
                 </>
             ) : (

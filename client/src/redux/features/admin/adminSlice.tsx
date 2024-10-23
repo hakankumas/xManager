@@ -7,11 +7,11 @@ const initialState: AdminInitialState = {
     admins: [],
 };
 
-export const register = createAsyncThunk(
-    "admin/register",
+export const create_admin = createAsyncThunk(
+    "admin/create-admin",
     async (payload: AdminType, { rejectWithValue }) => {
         try {
-            const response = await api().post("/admin/register", payload);
+            const response = await api().post("/admin/create-admin", payload);
             return response.data.admin;
         } catch (error: any) {
             console.log("error");
@@ -26,7 +26,7 @@ export const adminSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(
-            register.fulfilled,
+            create_admin.fulfilled,
             (state: AdminInitialState, action: PayloadAction<AdminType>) => {
                 state.admins = [...state.admins, action.payload];
             }

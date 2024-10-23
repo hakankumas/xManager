@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { AdminType } from "../types/AdminTypes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
-import { register } from "../redux/features/admin/adminSlice";
+import { create_admin } from "../redux/features/admin/adminSlice";
 
-function Register() {
+function CreateAdmin() {
     const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState<string>("");
     const [username, setUsername] = useState<string>("");
@@ -19,7 +19,7 @@ function Register() {
             username,
             password,
         };
-        dispatch(register(payload));
+        dispatch(create_admin(payload));
     };
 
     return (
@@ -46,10 +46,10 @@ function Register() {
                 }
             />
             <button onClick={handleSubmit} className="bg-green-600">
-                Register
+                Create
             </button>
         </div>
     );
 }
 
-export default Register;
+export default CreateAdmin;
