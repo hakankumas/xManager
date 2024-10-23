@@ -3,14 +3,15 @@ import { AdminType } from "../types/AdminTypes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
 import { create_admin } from "../redux/features/admin/adminSlice";
-
+import useCustomSnackBar from "../hooks/useCustomSnackBar";
 function CreateAdmin() {
+    const { showSnackBar } = useCustomSnackBar();
     const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState<string>("");
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log({ email, username, password });
         if (!email || !username || !password)
             return alert("Please enter email, username and password");
@@ -19,13 +20,20 @@ function CreateAdmin() {
             username,
             password,
         };
-        dispatch(create_admin(payload));
+        const response = await dispatch(create_admin(payload));
+        const errorMessage = response.payload.message;
+        if (errorMessage) {
+            showSnackBar({ message: errorMessage, variant: "error" });
+            return;
+        }
+        showSnackBar({ message: "Successfully!", variant: "success" });
     };
 
     return (
-        <div className="flex flex-col w-1/4 gap-2 p-5 text-black">
+        <div className="flex flex-col gap-2 px-10 py-5 text-black">
+            <h1 className="text-3xl flex justify-center">Create Admin</h1>
             <input
-                type="text"
+                type="email"
                 placeholder="Email"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setEmail(e.target.value)
@@ -45,9 +53,14 @@ function CreateAdmin() {
                     setPassword(e.target.value)
                 }
             />
-            <button onClick={handleSubmit} className="bg-green-600">
-                Create
-            </button>
+            <div className="flex justify-end">
+                <button
+                    onClick={handleSubmit}
+                    className="bg-green-600 p-2 rounded-md  text-slate-200"
+                >
+                    Create
+                </button>
+            </div>
         </div>
     );
 }
