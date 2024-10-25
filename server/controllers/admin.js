@@ -41,5 +41,13 @@ exports.get_admin = asyncHandler(async (req, res) => {
 });
 
 exports.getall_admin = asyncHandler(async (req, res) => {
-    res.send("getalladmin");
+    const admins = await Admin.find();
+    res.status(200).json({ message: "Successfully!", admins });
+});
+
+exports.delete_admin = asyncHandler(async (req, res) => {
+    const { _id } = req.params;
+    const admin = await Admin.findByIdAndDelete(_id);
+    if (!admin) return res.status(500).json({ message: "Failed!" });
+    res.status(200).json({ message: "Successfully Deleted!", admin });
 });

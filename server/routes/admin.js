@@ -7,6 +7,7 @@ const adminController = require("../controllers/admin");
 
 router.post("/login", adminController.login);
 router.post("/create-admin", adminController.create_admin);
+router.delete("/delete-admin/:_id", adminController.delete_admin);
 router.get("/get-admin", adminController.get_admin);
 router.get("/getall-admin", adminController.getall_admin);
 

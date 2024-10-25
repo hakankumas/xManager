@@ -1,8 +1,7 @@
-import React from "react";
-import CreateAdmin from "../components/CreateAdmin";
-import CreateUser from "../components/CreateUser";
-import EditAdmin from "../components/EditAdmin";
-import EditUser from "../components/EditUser";
+import CreateAdmin from "../components/AdminCreate";
+import EditAdmin from "../components/AdminList";
+// import CreateUser from "../components/CreateUser";
+// import EditUser from "../components/EditUser";
 
 function Home() {
     return (
@@ -13,12 +12,12 @@ function Home() {
             <div className="w-1/4 bg-slate-500">
                 <EditAdmin />
             </div>
-            <div className="w-1/4 bg-slate-500">
+            {/* <div className="w-1/4 bg-slate-500">
                 <CreateUser />
             </div>
             <div className="w-1/4 bg-slate-500">
                 <EditUser />
-            </div>
+            </div> */}
         </div>
     );
 }

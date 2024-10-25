@@ -3,10 +3,14 @@ export interface AdminInitialState {
 }
 
 export interface AdminType {
-    _id?: number;
+    _id?: string;
     username: string;
     email?: string;
     password?: string;
     pp_path?: string;
     role?: string;
+}
+
+export interface AdminDeleteId {
+    _id?: string;
 }

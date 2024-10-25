@@ -1,11 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { AdminInitialState, AdminType } from "../../../types/AdminTypes";
+import {
+    AdminDeleteId,
+    AdminInitialState,
+    AdminType,
+} from "../../../types/AdminTypes";
 import api from "../../../utils/api";
 
 const initialState: AdminInitialState = {
     admins: [],
 };
+
+export const getall_admin = createAsyncThunk("admin/getall-admin", async () => {
+    try {
+        const response = await api().get("/admin/getall-admin");
+        return response.data.admins;
+    } catch (error) {
+        console.log("error");
+    }
+});
 
 export const create_admin = createAsyncThunk(
     "admin/create-admin",
@@ -20,6 +33,20 @@ export const create_admin = createAsyncThunk(
     }
 );
 
+export const delete_admin = createAsyncThunk(
+    "admin/delete-admin",
+    async (payload: AdminDeleteId) => {
+        try {
+            const response = await api().delete(
+                `/admin/delete-admin/${payload._id}`
+            );
+            return response.data.admin;
+        } catch (error: any) {
+            console.log(error);
+        }
+    }
+);
+
 export const adminSlice = createSlice({
     name: "admin",
     initialState,
@@ -30,7 +57,27 @@ export const adminSlice = createSlice({
             (state: AdminInitialState, action: PayloadAction<AdminType>) => {
                 state.admins = [...state.admins, action.payload];
             }
-        );
+        ),
+            builder.addCase(
+                getall_admin.fulfilled,
+                (
+                    state: AdminInitialState,
+                    action: PayloadAction<AdminType[]>
+                ) => {
+                    state.admins = action.payload;
+                }
+            ),
+            builder.addCase(
+                delete_admin.fulfilled,
+                (
+                    state: AdminInitialState,
+                    action: PayloadAction<AdminType>
+                ) => {
+                    state.admins = state.admins.filter(
+                        (admin) => admin._id !== action.payload._id
+                    );
+                }
+            );
     },
 });
 

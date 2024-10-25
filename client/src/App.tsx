@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Index from "./pages/Index";
-import CreateAdmin from "./components/CreateAdmin";
+import CreateAdmin from "./components/AdminCreate";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
 import Logout from "./components/Logout";

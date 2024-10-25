@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
 import { create_admin } from "../redux/features/admin/adminSlice";
 import useCustomSnackBar from "../hooks/useCustomSnackBar";
-function CreateAdmin() {
+function AdminCreate() {
     const { showSnackBar } = useCustomSnackBar();
     const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState<string>("");
@@ -65,4 +65,4 @@ function CreateAdmin() {
     );
 }
 
-export default CreateAdmin;
+export default AdminCreate;
