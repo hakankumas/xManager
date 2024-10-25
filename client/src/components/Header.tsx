@@ -22,13 +22,17 @@ function Header() {
                     </div>
                 </div>
             ) : (
-                <>
-                    <Link to="/">xManager</Link>
-                    <Link to="/">Home</Link>
-                    <Link to="/login" className="hover:text-green-500">
-                        Login
-                    </Link>
-                </>
+                <div className="flex flex-1 justify-between gap-10 items-center">
+                    <div className="flex gap-10 items-center">
+                        <Link to="/">xManager</Link>
+                        <Link to="/">Home</Link>
+                    </div>
+                    <div>
+                        <Link to="/login" className="hover:text-green-500">
+                            Login
+                        </Link>
+                    </div>
+                </div>
             )}
         </div>
     );
