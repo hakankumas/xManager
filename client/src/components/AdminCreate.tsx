@@ -30,6 +30,9 @@ function AdminCreate() {
             return;
         }
         showSnackBar({ message: "Successfully!", variant: "success" });
+        setEmail("");
+        setUsername("");
+        setPassword("");
     };
 
     return (
@@ -38,6 +41,7 @@ function AdminCreate() {
             <input
                 type="email"
                 placeholder="Email"
+                value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setEmail(e.target.value)
                 }
@@ -45,6 +49,7 @@ function AdminCreate() {
             <input
                 type="text"
                 placeholder="Username"
+                value={username}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setUsername(e.target.value)
                 }
@@ -52,6 +57,7 @@ function AdminCreate() {
             <input
                 type="text"
                 placeholder="Password"
+                value={password}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPassword(e.target.value)
                 }
