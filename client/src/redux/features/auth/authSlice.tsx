@@ -27,6 +27,14 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        isSession: (state: AuthInitialState) => {
+            state.auth = [
+                {
+                    username: localStorage.getItem("username") || "",
+                },
+            ];
+            state.session = true;
+        },
         logout: (state: AuthInitialState) => {
             localStorage.clear();
             state.auth = [];
@@ -44,5 +52,5 @@ export const authSlice = createSlice({
     },
 });
 
-export const { logout } = authSlice.actions;
+export const { isSession, logout } = authSlice.actions;
 export default authSlice.reducer;
