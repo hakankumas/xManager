@@ -1,5 +1,6 @@
 export interface AdminInitialState {
     admins: AdminType[];
+    errorMessage: string;
 }
 
 export interface AdminType {

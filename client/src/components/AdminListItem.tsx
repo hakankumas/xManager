@@ -2,18 +2,25 @@ import { useState } from "react";
 import { AdminDeleteId, AdminType } from "../types/AdminTypes";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import ModalAdminItemDelete from "./ModalAdminItemDelete";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
 import { delete_admin } from "../redux/features/admin/adminSlice";
 import useCustomSnackBar from "../hooks/useCustomSnackBar";
+import ModalAdminItemUpdate from "./ModalAdminItemUpdate";
+import ModalAdminItemDelete from "./ModalAdminItemDelete";
 
-function AdminListItem({ admin }: { admin: AdminType }) {
+function AdminListItem({
+    admin,
+    errorMessage,
+}: {
+    admin: AdminType;
+    errorMessage: string;
+}) {
     const { showSnackBar } = useCustomSnackBar();
+    const dispatch = useDispatch<AppDispatch>();
     const { _id, username, email, password, pp_path, role } = admin;
     const [deleteModal, setDeleteModal] = useState<boolean>(false);
-    const dispatch = useDispatch<AppDispatch>();
-
+    const [updateModal, setUpdateModal] = useState<boolean>(false);
     const handleDelete = () => {
         console.log({ _id });
         try {
@@ -36,7 +43,10 @@ function AdminListItem({ admin }: { admin: AdminType }) {
             </div>
             <div className="flex w-1/4">
                 <button className="w-1/2 flex justify-center items-center">
-                    <FaEdit className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl" />
+                    <FaEdit
+                        className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl"
+                        onClick={() => setUpdateModal(true)}
+                    />
                 </button>
                 <button className="w-1/2 flex justify-center items-center">
                     <MdDelete
@@ -44,6 +54,12 @@ function AdminListItem({ admin }: { admin: AdminType }) {
                         onClick={() => setDeleteModal(true)}
                     />
                 </button>
+                <ModalAdminItemUpdate
+                    updateModal={updateModal}
+                    setUpdateModal={setUpdateModal}
+                    admin={admin}
+                    errorMessage={errorMessage}
+                />
                 <ModalAdminItemDelete
                     deleteModal={deleteModal}
                     setDeleteModal={setDeleteModal}

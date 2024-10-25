@@ -5,7 +5,9 @@ import { getall_admin } from "../redux/features/admin/adminSlice";
 import AdminListItem from "./AdminListItem";
 
 function AdminList() {
-    const { admins } = useSelector((state: RootState) => state.admin);
+    const { admins, errorMessage } = useSelector(
+        (state: RootState) => state.admin
+    );
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -20,7 +22,11 @@ function AdminList() {
             <div>
                 {admins &&
                     admins.map((admin) => (
-                        <AdminListItem key={admin._id} admin={admin} />
+                        <AdminListItem
+                            key={admin._id}
+                            admin={admin}
+                            errorMessage={errorMessage}
+                        />
                     ))}
             </div>
         </div>

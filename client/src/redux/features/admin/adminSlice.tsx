@@ -9,6 +9,7 @@ import api from "../../../utils/api";
 
 const initialState: AdminInitialState = {
     admins: [],
+    errorMessage: "",
 };
 
 export const getall_admin = createAsyncThunk("admin/getall-admin", async () => {
@@ -47,18 +48,29 @@ export const delete_admin = createAsyncThunk(
     }
 );
 
+export const update_admin = createAsyncThunk<
+    AdminType,
+    AdminType,
+    {
+        rejectValue: string;
+    }
+>("admin/update-admin", async (payload: AdminType, { rejectWithValue }) => {
+    try {
+        const response = await api().put("/admin/update-admin", payload);
+        return response.data.admin;
+    } catch (error: any) {
+        console.log(error.response.data.message);
+        return rejectWithValue(error.response?.data?.message || error.message);
+    }
+});
+
 export const adminSlice = createSlice({
     name: "admin",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(
-            create_admin.fulfilled,
-            (state: AdminInitialState, action: PayloadAction<AdminType>) => {
-                state.admins = [...state.admins, action.payload];
-            }
-        ),
-            builder.addCase(
+        builder
+            .addCase(
                 getall_admin.fulfilled,
                 (
                     state: AdminInitialState,
@@ -66,8 +78,17 @@ export const adminSlice = createSlice({
                 ) => {
                     state.admins = action.payload;
                 }
-            ),
-            builder.addCase(
+            )
+            .addCase(
+                create_admin.fulfilled,
+                (
+                    state: AdminInitialState,
+                    action: PayloadAction<AdminType>
+                ) => {
+                    state.admins = [...state.admins, action.payload];
+                }
+            )
+            .addCase(
                 delete_admin.fulfilled,
                 (
                     state: AdminInitialState,
@@ -76,6 +97,32 @@ export const adminSlice = createSlice({
                     state.admins = state.admins.filter(
                         (admin) => admin._id !== action.payload._id
                     );
+                }
+            )
+            .addCase(
+                update_admin.fulfilled,
+                (
+                    state: AdminInitialState,
+                    action: PayloadAction<AdminType>
+                ) => {
+                    state.admins = [
+                        ...state.admins.map((admin) =>
+                            admin._id !== action.payload._id
+                                ? admin
+                                : action.payload
+                        ),
+                    ];
+                    state.errorMessage = "";
+                }
+            )
+            .addCase(
+                update_admin.rejected,
+                (
+                    state: AdminInitialState,
+                    action: PayloadAction<string | undefined>
+                ) => {
+                    state.errorMessage =
+                        action.payload || "Beklenmeyen bir hata oluştu";
                 }
             );
     },
