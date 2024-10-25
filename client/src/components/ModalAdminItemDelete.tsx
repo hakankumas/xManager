@@ -31,7 +31,7 @@ function ModalAdminItemDelete({
         <div>
             <Modal
                 open={deleteModal}
-                onClose={() => setDeleteModal(false)}
+                onClose={() => setDeleteModal(!deleteModal)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -52,7 +52,7 @@ function ModalAdminItemDelete({
                             Delete
                         </Button>
                         <Button
-                            onClick={() => setDeleteModal(false)}
+                            onClick={() => setDeleteModal(!deleteModal)}
                             variant="contained"
                             sx={{ backgroundColor: "gray" }}
                         >

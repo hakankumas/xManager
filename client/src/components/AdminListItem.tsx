@@ -30,16 +30,19 @@ function AdminListItem({ admin }: { admin: AdminType }) {
         }
     };
     return (
-        <div className="flex border gap-5 my-3 mx-3 p-3 hover:bg-slate-600 rounded-md">
+        <div className="flex items-center border gap-5 my-3 mx-3 p-3 hover:bg-slate-600 rounded-md">
             <div className="w-3/4">
                 <h1>{"@" + username}</h1>
             </div>
             <div className="flex w-1/4">
-                <button className="w-1/2 hover:bg-green-500 rounded-md flex justify-center items-center">
-                    <FaEdit />
+                <button className="w-1/2 flex justify-center items-center">
+                    <FaEdit className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl" />
                 </button>
-                <button className="w-1/2 hover:bg-red-500 rounded-md flex justify-center items-center">
-                    <MdDelete onClick={() => setDeleteModal(true)} />
+                <button className="w-1/2 flex justify-center items-center">
+                    <MdDelete
+                        className="hover:text-red-500 hover:bg-slate-700 rounded-md p-1 text-3xl"
+                        onClick={() => setDeleteModal(true)}
+                    />
                 </button>
                 <ModalAdminItemDelete
                     deleteModal={deleteModal}
