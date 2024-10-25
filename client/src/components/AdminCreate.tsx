@@ -12,9 +12,12 @@ function AdminCreate() {
     const [password, setPassword] = useState<string>("");
 
     const handleSubmit = async () => {
-        console.log({ email, username, password });
-        if (!email || !username || !password)
-            return alert("Please enter email, username and password");
+        if (!email || !username || !password) {
+            return showSnackBar({
+                message: "Please enter full data!",
+                variant: "error",
+            });
+        }
         const payload: AdminType = {
             email,
             username,
