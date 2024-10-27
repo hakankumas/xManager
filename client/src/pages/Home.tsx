@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import CreateAdmin from "../components/AdminCreate";
 import EditAdmin from "../components/AdminList";
-import { isSession, login } from "../redux/features/auth/authSlice";
+import { isSession } from "../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
-// import CreateUser from "../components/CreateUser";
-// import EditUser from "../components/EditUser";
+import UserList from "../components/UserList";
+import UserPostList from "../components/UserPostList";
 
 function Home() {
     const dispatch = useDispatch<AppDispatch>();
@@ -25,12 +25,12 @@ function Home() {
             <div className="w-1/4 bg-slate-500">
                 <EditAdmin />
             </div>
-            {/* <div className="w-1/4 bg-slate-500">
-                <CreateUser />
+            <div className="w-1/4 bg-slate-500">
+                <UserList />
             </div>
             <div className="w-1/4 bg-slate-500">
-                <EditUser />
-            </div> */}
+                <UserPostList />
+            </div>
         </div>
     );
 }
