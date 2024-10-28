@@ -10,7 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 
 const adminRoutes = require("./routes/admin");
+const userRoutes = require("./routes/user");
+
 app.use("/admin", adminRoutes);
+app.use("/user", userRoutes);
 
 const PORT = process.env.PORT;
 const SERVER_URL = process.env.SERVER_URL;
