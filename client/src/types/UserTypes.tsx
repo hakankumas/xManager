@@ -5,11 +5,11 @@ export interface UserInitialState {
 
 export interface UserType {
     _id?: string;
-    username: string;
     email?: string;
+    username: string;
     password?: string;
     pp_path?: string;
-    telephone?: number;
+    telephone?: number | string;
     aboutme?: string;
 }
 

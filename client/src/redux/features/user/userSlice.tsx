@@ -31,6 +31,19 @@ export const delete_user = createAsyncThunk<
     }
 });
 
+export const create_user = createAsyncThunk<
+    UserType, // fulfilled durumunda dönecek veri tipi
+    UserType, // thunk argüman tipi (func çağrıldığında kullanılacak condition değeri)
+    { rejectValue: string } // rejected durumunda dönecek hata tipi
+>("user/create-user", async (payload, { rejectWithValue }) => {
+    try {
+        const response = await api().post("/user/create-user", payload);
+        return response.data.user;
+    } catch (error: any) {
+        return rejectWithValue(error.response?.data?.message || error.message);
+    }
+});
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -45,6 +58,23 @@ export const userSlice = createSlice({
                 ) => {
                     state.users = action.payload;
                     state.errorMessage = null;
+                }
+            )
+            .addCase(
+                create_user.fulfilled,
+                (state: UserInitialState, action: PayloadAction<UserType>) => {
+                    state.users = [...state.users, action.payload];
+                    state.errorMessage = null;
+                }
+            )
+            .addCase(
+                create_user.rejected,
+                (
+                    state: UserInitialState,
+                    action: PayloadAction<string | undefined>
+                ) => {
+                    state.errorMessage =
+                        action.payload || "Something went wrong";
                 }
             )
             .addCase(
