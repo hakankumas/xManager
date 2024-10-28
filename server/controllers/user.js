@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 exports.getall_user = asyncHandler(async (req, res) => {
-    const user = await User.find();
-    if (!user) return res.status(404).json({ message: "Users not reached!" });
-    res.status(200).json({ message: "Successfully!", user });
+    const users = await User.find();
+    if (!users) return res.status(404).json({ message: "Users not reached!" });
+    res.status(200).json({ message: "Successfully!", users });
 });
 
 exports.get_user = asyncHandler(async (req, res) => {
