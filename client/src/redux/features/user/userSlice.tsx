@@ -44,6 +44,24 @@ export const create_user = createAsyncThunk<
     }
 });
 
+export const update_user = createAsyncThunk<
+    UserType,
+    UserType,
+    {
+        rejectValue: string;
+    }
+>("user/update-user", async (payload: UserType, { rejectWithValue }) => {
+    try {
+        const response = await api().put(
+            `/user/update-user/${payload._id}`,
+            payload
+        );
+        return response.data.user;
+    } catch (error: any) {
+        return rejectWithValue(error.response?.data?.message || error.message);
+    }
+});
+
 export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -88,6 +106,29 @@ export const userSlice = createSlice({
             )
             .addCase(
                 delete_user.rejected,
+                (
+                    state: UserInitialState,
+                    action: PayloadAction<string | undefined>
+                ) => {
+                    state.errorMessage =
+                        action.payload || "Something went wrong";
+                }
+            )
+            .addCase(
+                update_user.fulfilled,
+                (state: UserInitialState, action: PayloadAction<UserType>) => {
+                    state.users = [
+                        ...state.users.map((user) =>
+                            user._id !== action.payload._id
+                                ? user
+                                : action.payload
+                        ),
+                    ];
+                    state.errorMessage = "";
+                }
+            )
+            .addCase(
+                update_user.rejected,
                 (
                     state: UserInitialState,
                     action: PayloadAction<string | undefined>

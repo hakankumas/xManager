@@ -3,11 +3,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, FormControl, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { AdminType } from "../types/AdminTypes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
-import { update_admin } from "../redux/features/admin/adminSlice";
 import useCustomSnackBar from "../hooks/useCustomSnackBar";
+import { UserType } from "../types/UserTypes";
+import { update_user } from "../redux/features/user/userSlice";
 
 const style = {
     position: "absolute",
@@ -23,20 +23,18 @@ const style = {
     p: 4,
 };
 
-interface AdminListItemModalUpdateProps {
+interface UserListItemModalUpdateProps {
     updateModal: boolean;
     setUpdateModal: (value: boolean) => void;
-    admin: AdminType;
-    errorMessage: string;
+    user: UserType;
 }
 
-function AdminListItemModalUpdate({
+function UserListItemModalUpdate({
     updateModal,
     setUpdateModal,
-    admin,
-    errorMessage,
-}: AdminListItemModalUpdateProps) {
-    const { _id, email, username } = admin;
+    user,
+}: UserListItemModalUpdateProps) {
+    const { _id, email, username } = user;
     const dispatch = useDispatch<AppDispatch>();
     const { showSnackBar } = useCustomSnackBar();
     const [inputEmail, setInputEmail] = useState<string>("");
@@ -50,22 +48,29 @@ function AdminListItemModalUpdate({
                 variant: "error",
             });
         }
-        const payload: AdminType = {
-            _id: _id,
-            email: inputEmail,
-            username: inputUsername,
-            password: inputPassword,
-        };
-        const resultAction = await dispatch(update_admin(payload));
-        if (update_admin.rejected.match(resultAction)) {
-            const errorMessage = resultAction.payload as string;
-            return showSnackBar({ message: errorMessage, variant: "error" });
+        try {
+            const payload: UserType = {
+                _id: _id,
+                email: inputEmail,
+                username: inputUsername,
+                password: inputPassword,
+            };
+
+            const response = await dispatch(update_user(payload)).unwrap();
+            setUpdateModal(!updateModal);
+            showSnackBar({
+                message: "Successfully Updated!",
+                variant: "success",
+            });
+            setInputEmail("");
+            setInputUsername("");
+            setInputPassword("");
+        } catch (error) {
+            showSnackBar({
+                message: error as string,
+                variant: "error",
+            });
         }
-        showSnackBar({ message: "Successfully!", variant: "success" });
-        setUpdateModal(!updateModal);
-        setInputEmail("");
-        setInputUsername("");
-        setInputPassword("");
     };
     return (
         <div>
@@ -144,4 +149,4 @@ function AdminListItemModalUpdate({
     );
 }
 
-export default AdminListItemModalUpdate;
+export default UserListItemModalUpdate;

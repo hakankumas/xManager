@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { UserById, UserType } from "../types/UserTypes";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from "../redux/app/store";
 import { delete_user } from "../redux/features/user/userSlice";
 import useCustomSnackBar from "../hooks/useCustomSnackBar";
 import UserListItemModalDelete from "./UserListItemModalDelete";
+import UserListItemModalUpdate from "./UserListItemModalUpdate";
 
 interface UserListItemProps {
     user: UserType;
@@ -20,6 +21,7 @@ function UserListItem({ user }: UserListItemProps) {
     const dispatch = useDispatch<AppDispatch>();
     const { _id, username } = user;
     const [deleteModal, setDeleteModal] = useState<boolean>(false);
+    const [updateModal, setUpdateModal] = useState<boolean>(false);
 
     const handleDelete = () => {
         try {
@@ -44,7 +46,10 @@ function UserListItem({ user }: UserListItemProps) {
             </div>
             <div className="flex w-1/4">
                 <button className="w-1/2 flex justify-center items-center">
-                    <FaEdit className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl" />
+                    <FaEdit
+                        className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl"
+                        onClick={() => setUpdateModal(true)}
+                    />
                 </button>
                 <button className="w-1/2 flex justify-center items-center">
                     <MdDelete
@@ -52,6 +57,11 @@ function UserListItem({ user }: UserListItemProps) {
                         onClick={() => setDeleteModal(true)}
                     />
                 </button>
+                <UserListItemModalUpdate
+                    updateModal={updateModal}
+                    setUpdateModal={setUpdateModal}
+                    user={user}
+                />
                 <UserListItemModalDelete
                     deleteModal={deleteModal}
                     setDeleteModal={setDeleteModal}

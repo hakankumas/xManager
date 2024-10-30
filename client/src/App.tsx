@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Index from "./pages/Index";
-import CreateAdmin from "./components/AdminCreate";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
 import Logout from "./components/Logout";
@@ -17,7 +16,6 @@ function App() {
                 <Route path="/logout" element={<Logout />} />
 
                 <Route path="/admin/" element={<Home />} />
-                <Route path="/admin/create-admin" element={<CreateAdmin />} />
 
                 <Route path="*" element={<Error />} />
             </Routes>

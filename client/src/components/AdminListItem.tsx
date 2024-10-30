@@ -9,13 +9,14 @@ import useCustomSnackBar from "../hooks/useCustomSnackBar";
 import AdminListItemModalDelete from "./AdminListItemModalDelete";
 import AdminListItemModalUpdate from "./AdminListItemModalUpdate";
 
-function AdminListItem({
-    admin,
-    errorMessage,
-}: {
+interface AdminListItemProps {
     admin: AdminType;
     errorMessage: string;
-}) {
+}
+
+function AdminListItem({ admin, errorMessage }: AdminListItemProps) {
+    console.log("AdminListItem component rendered.");
+
     const { showSnackBar } = useCustomSnackBar();
     const dispatch = useDispatch<AppDispatch>();
     const { _id, username, email, password, pp_path, role } = admin;
