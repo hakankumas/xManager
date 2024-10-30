@@ -30,19 +30,19 @@ const style = {
     p: 4,
 };
 
-interface ModalAdminItemUpdateProps {
+interface AdminListItemModalUpdateProps {
     updateModal: boolean;
     setUpdateModal: (value: boolean) => void;
     admin: AdminType;
     errorMessage: string;
 }
 
-function ModalAdminItemUpdate({
+function AdminListItemModalUpdate({
     updateModal,
     setUpdateModal,
     admin,
     errorMessage,
-}: ModalAdminItemUpdateProps) {
+}: AdminListItemModalUpdateProps) {
     const { _id, email, username } = admin;
     const dispatch = useDispatch<AppDispatch>();
     const { showSnackBar } = useCustomSnackBar();
@@ -151,4 +151,4 @@ function ModalAdminItemUpdate({
     );
 }
 
-export default ModalAdminItemUpdate;
+export default AdminListItemModalUpdate;

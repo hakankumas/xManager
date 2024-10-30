@@ -16,17 +16,17 @@ const style = {
     p: 4,
 };
 
-interface ModalAdminItemDeleteProps {
+interface AdminListItemModalDeleteProps {
     deleteModal: boolean;
     setDeleteModal: (value: boolean) => void;
     handleDelete: () => void;
 }
 
-function ModalAdminItemDelete({
+function AdminListItemModalDelete({
     deleteModal,
     setDeleteModal,
     handleDelete,
-}: ModalAdminItemDeleteProps) {
+}: AdminListItemModalDeleteProps) {
     return (
         <div>
             <Modal
@@ -65,4 +65,4 @@ function ModalAdminItemDelete({
     );
 }
 
-export default ModalAdminItemDelete;
+export default AdminListItemModalDelete;

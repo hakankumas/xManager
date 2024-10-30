@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
 import { delete_admin } from "../redux/features/admin/adminSlice";
 import useCustomSnackBar from "../hooks/useCustomSnackBar";
-import ModalAdminItemUpdate from "./ModalAdminItemUpdate";
-import ModalAdminItemDelete from "./ModalAdminItemDelete";
+import AdminListItemModalDelete from "./AdminListItemModalDelete";
+import AdminListItemModalUpdate from "./AdminListItemModalUpdate";
 
 function AdminListItem({
     admin,
@@ -22,7 +22,6 @@ function AdminListItem({
     const [deleteModal, setDeleteModal] = useState<boolean>(false);
     const [updateModal, setUpdateModal] = useState<boolean>(false);
     const handleDelete = () => {
-        console.log({ _id });
         try {
             const payload: AdminDeleteId = {
                 _id,
@@ -54,13 +53,13 @@ function AdminListItem({
                         onClick={() => setDeleteModal(true)}
                     />
                 </button>
-                <ModalAdminItemUpdate
+                <AdminListItemModalUpdate
                     updateModal={updateModal}
                     setUpdateModal={setUpdateModal}
                     admin={admin}
                     errorMessage={errorMessage}
                 />
-                <ModalAdminItemDelete
+                <AdminListItemModalDelete
                     deleteModal={deleteModal}
                     setDeleteModal={setDeleteModal}
                     handleDelete={handleDelete}
