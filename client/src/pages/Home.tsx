@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import CreateAdmin from "../components/AdminCreate";
-import EditAdmin from "../components/AdminList";
+import AdminList from "../components/AdminList";
 import { isSession } from "../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/app/store";
@@ -20,15 +19,12 @@ function Home() {
     return (
         <div className="flex mx-3 gap-3 min-h-screen">
             <div className="w-1/4 bg-slate-500">
-                <CreateAdmin />
-            </div>
-            <div className="w-1/4 bg-slate-500">
-                <EditAdmin />
+                <AdminList />
             </div>
             <div className="w-1/4 bg-slate-500">
                 <UserList />
             </div>
-            <div className="w-1/4 bg-slate-500">
+            <div className="w-2/4 bg-slate-500">
                 <UserPostList />
             </div>
         </div>
