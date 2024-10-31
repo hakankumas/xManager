@@ -15,16 +15,16 @@ import {
     Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import useCustomSnackBar from "../hooks/useCustomSnackBar";
 
 function Login() {
+    const { showSnackBar } = useCustomSnackBar();
     const { session } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
-    const [statusText, setStatusText] = useState<string>("");
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -40,7 +40,12 @@ function Login() {
         };
         const response = await dispatch(login(payload));
         const errorMessage = response.payload.message;
-        if (errorMessage) setStatusText(errorMessage);
+        if (errorMessage) {
+            showSnackBar({
+                message: errorMessage as string,
+                variant: "error",
+            });
+        }
     };
 
     useEffect(() => {
@@ -157,11 +162,6 @@ function Login() {
                         }
                     />
                 </FormControl>
-                {statusText && (
-                    <h6 className="text-red-600 flex justify-center">
-                        {statusText}
-                    </h6>
-                )}
                 <div className="flex justify-end">
                     <Button
                         variant="contained"
