@@ -42,7 +42,7 @@ exports.update_content = asyncHandler(async (req, res) => {
     if (req.body.content) updateFields.content = req.body.content;
     const content = await Content.findByIdAndUpdate(_id, updateFields, {
         new: true,
-    });
+    }).populate("user");
     if (!content)
         return res.status(500).json({ message: "Content couldn't updated!" });
     res.status(200).json({ message: "Successfully updated!", content });

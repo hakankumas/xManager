@@ -7,18 +7,18 @@ import useCustomSnackBar from "../hooks/useCustomSnackBar";
 import { AppDispatch } from "../redux/app/store";
 import { useDispatch } from "react-redux";
 import { delete_content } from "../redux/features/content/contentSlice";
+import UserPostListItemUpdate from "./UserPostListItemUpdate";
 
 interface UserPostListItemProps {
     content: ContentType;
 }
 
 function UserPostListItem({ content }: UserPostListItemProps) {
-    console.log("UserPostListItem component rendered.");
-
     const { showSnackBar } = useCustomSnackBar();
     const dispatch = useDispatch<AppDispatch>();
     const { content: dataContent, user, _id } = content;
     const [deleteModal, setDeleteModal] = useState<boolean>(false);
+    const [updateModal, setUpdateModal] = useState<boolean>(false);
 
     const handleDelete = async () => {
         try {
@@ -43,13 +43,21 @@ function UserPostListItem({ content }: UserPostListItemProps) {
                 <div className="w-1/4">
                     <p>{"@" + user?.username}</p>
                 </div>
-                <div className="w-3/4">
-                    <p>{dataContent}</p>
+                <div className="w-3/4 overflow-hidden text-ellipsis">
+                    <p
+                        className="whitespace-nowrap overflow-hidden text-ellipsis"
+                        title={dataContent}
+                    >
+                        {dataContent}
+                    </p>
                 </div>
             </div>
             <div className="flex w-1/6">
                 <button className="w-1/2 flex justify-center items-center">
-                    <FaEdit className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl" />
+                    <FaEdit
+                        className="hover:text-green-400 hover:bg-slate-700 rounded-md p-1 text-3xl"
+                        onClick={() => setUpdateModal(true)}
+                    />
                 </button>
                 <button className="w-1/2 flex justify-center items-center">
                     <MdDelete
@@ -57,6 +65,11 @@ function UserPostListItem({ content }: UserPostListItemProps) {
                         onClick={() => setDeleteModal(true)}
                     />
                 </button>
+                <UserPostListItemUpdate
+                    updateModal={updateModal}
+                    setUpdateModal={setUpdateModal}
+                    content={content}
+                />
                 <UserPostListItemDelete
                     deleteModal={deleteModal}
                     setDeleteModal={setDeleteModal}
