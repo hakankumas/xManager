@@ -3,7 +3,7 @@ import React from "react";
 function Index() {
     return (
         <div
-            className="flex flex-col px-20 pt-12 text-justify gap-5"
+            className="flex flex-col min-h-screen px-20 pt-12 text-justify gap-5"
             style={{ textIndent: "2em" }}
         >
             <h1 className="flex justify-center text-3xl">What's xManager?</h1>
