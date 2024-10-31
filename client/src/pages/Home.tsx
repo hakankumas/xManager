@@ -18,13 +18,13 @@ function Home() {
     }, []);
     return (
         <div className="flex mx-3 gap-3 min-h-screen">
-            <div className="w-1/4 bg-slate-500">
+            <div className="w-1/4 bg-slate-700">
                 <AdminList />
             </div>
-            <div className="w-1/4 bg-slate-500">
+            <div className="w-1/4 bg-slate-700">
                 <UserList />
             </div>
-            <div className="w-2/4 bg-slate-500">
+            <div className="w-2/4 bg-slate-700">
                 <UserPostList />
             </div>
         </div>

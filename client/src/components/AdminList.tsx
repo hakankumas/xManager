@@ -20,7 +20,7 @@ function AdminList() {
     return (
         <div className="flex flex-col gap-2 px-3 py-5 text-slate-200">
             <div className="flex justify-between items-center px-5">
-                <h1 className="text-3xl flex justify-center text-black">
+                <h1 className="text-3xl flex justify-center text-slate-100">
                     Admin List
                 </h1>
                 <div
