@@ -27,7 +27,6 @@ function AdminListItemModalDelete({
     setDeleteModal,
     handleDelete,
 }: AdminListItemModalDeleteProps) {
-    console.log("AdminListItemModalDelete component rendered");
     return (
         <div>
             <Modal

@@ -14,8 +14,6 @@ interface UserListItemProps {
 }
 
 function UserListItem({ user }: UserListItemProps) {
-    console.log("UserListItem component rendered.");
-
     const { errorMessage } = useSelector((state: RootState) => state.user);
     const { showSnackBar } = useCustomSnackBar();
     const dispatch = useDispatch<AppDispatch>();

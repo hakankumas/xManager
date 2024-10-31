@@ -7,7 +7,6 @@ import { ContentType } from "../types/ContentTypes";
 import { FaRegPlusSquare } from "react-icons/fa";
 import UserPostModalCreate from "./UserPostModalCreate";
 function UserPostList() {
-    console.log("UserPostList component rendered.");
     const { contents } = useSelector((state: RootState) => state.content);
     const dispatch = useDispatch<AppDispatch>();
     const [createModal, setCreateModal] = useState<boolean>(false);

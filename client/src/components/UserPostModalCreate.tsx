@@ -120,6 +120,9 @@ function UserPostModalCreate({
                                 label="Content"
                                 type="text"
                                 variant="standard"
+                                multiline
+                                minRows={1}
+                                maxRows={7}
                                 value={content}
                                 onChange={(
                                     e: React.ChangeEvent<HTMLInputElement>

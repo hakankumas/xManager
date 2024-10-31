@@ -27,7 +27,6 @@ function UserPostListItemDelete({
     setDeleteModal,
     handleDelete,
 }: UserPostListItemDeleteProps) {
-    console.log("UserPostListItemDelete component rendered");
     return (
         <div>
             <Modal

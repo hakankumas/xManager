@@ -15,8 +15,6 @@ interface AdminListItemProps {
 }
 
 function AdminListItem({ admin, errorMessage }: AdminListItemProps) {
-    console.log("AdminListItem component rendered.");
-
     const { showSnackBar } = useCustomSnackBar();
     const dispatch = useDispatch<AppDispatch>();
     const { _id, username, email, password, pp_path, role } = admin;

@@ -7,8 +7,6 @@ import { FaRegPlusSquare } from "react-icons/fa";
 import AdminCreateModal from "./AdminCreateModal";
 
 function AdminList() {
-    console.log("AdminList component rendered.");
-
     const { admins, errorMessage } = useSelector(
         (state: RootState) => state.admin
     );

@@ -7,8 +7,6 @@ import { UserType } from "../types/UserTypes";
 import { FaRegPlusSquare } from "react-icons/fa";
 import UserCreateModal from "./UserCreateModal";
 function UserList() {
-    console.log("UserList component rendered.");
-
     const { users } = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch<AppDispatch>();
     const [createModal, setCreateModal] = useState<boolean>(false);
