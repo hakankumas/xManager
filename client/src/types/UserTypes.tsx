@@ -6,7 +6,7 @@ export interface UserInitialState {
 export interface UserType {
     _id?: string;
     email?: string;
-    username: string;
+    username?: string;
     password?: string;
     pp_path?: string;
     telephone?: number | string;

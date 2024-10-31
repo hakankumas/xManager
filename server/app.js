@@ -11,9 +11,11 @@ app.use("/public", express.static("public"));
 
 const adminRoutes = require("./routes/admin");
 const userRoutes = require("./routes/user");
+const contentRoutes = require("./routes/content");
 
 app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
+app.use("/content", contentRoutes);
 
 const PORT = process.env.PORT;
 const SERVER_URL = process.env.SERVER_URL;
